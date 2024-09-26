@@ -15,7 +15,7 @@ function App() {
 
 		if (data.name) {
 			const { avatar_url, name, bio, login } = data;
-			setCurrentUser(avatar_url, name, bio, login);
+			setCurrentUser({avatar_url, name, bio, login});
 
 			const responseRepos = await fetch(
 				`https://api.github.com/users/${user}/repos`
@@ -64,15 +64,17 @@ function App() {
 							<hr />
 						</>
 					) : null}
-          {repos?.length > 0 ? (
-            <div>
-						<h4 className='repositorio'>Repositórios</h4>
-            {repos.map((repo) => (
-              <ItemList title={repo.name} description={repo.description} />
-            ))}
-					</div>
-          ) : null}
-					
+					{repos?.length > 0 ? (
+						<div>
+							<h4 className='repositorio'>Repositórios</h4>
+							{repos.map((repo) => (
+								<ItemList
+									title={repo.name}
+									description={repo.description}
+								/>
+							))}
+						</div>
+					) : null}
 				</div>
 			</div>
 		</div>
